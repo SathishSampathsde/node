@@ -1,0 +1,15 @@
+const app = require("../app");
+const mongoose = require("mongoose");
+
+const dotenv = require("dotenv");
+dotenv.config();
+
+const DATABASE_URL = `mongodb+srv://${process.env.MONGO_DATABASE_USERNAME}:${process.env.MONGO_DATABASE_PASSWORD}@cluster0.hczhkdp.mongodb.net/fourpm?retryWrites=true&w=majority`;
+
+const PORT = process.env.APP_PORT || 3000;
+
+mongoose.connect(DATABASE_URL).then(() => {
+  app.listen(PORT, () => {
+    console.log(`App is successfully running on ${PORT} port....`);
+  });
+});
